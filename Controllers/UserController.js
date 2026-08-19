@@ -399,7 +399,7 @@ export const googleAuthCallback = async (req, res) => {
     );
 
     // Redirect to frontend with token in query params
-    const frontendUrl = process.env.FRONTEND_URL || "https://event-planning-frontend.vercel.app/"; 
+    const frontendUrl = process.env.FRONTEND_URL || "https://eventify-frontend-six-xi.vercel.app/"; 
     res.redirect(`${frontendUrl}?token=${token}`);
   } catch (error) {
     console.error("GOOGLE CALLBACK ERROR:", error);

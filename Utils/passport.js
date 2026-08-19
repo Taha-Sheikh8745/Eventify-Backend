@@ -10,7 +10,7 @@ passport.use(
     {
       clientID: process.env.Googleclientid,
       clientSecret: process.env.Googleclientsecret,
-      callbackURL: process.env.GOOGLE_CALLBACK_URL || 'https://event-planning-backend.vercel.app/user/auth/google/callback',
+      callbackURL: process.env.GOOGLE_CALLBACK_URL || 'https://eventify-backend-ten.vercel.app/user/auth/google/callback',
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
