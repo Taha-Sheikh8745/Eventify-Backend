@@ -79,16 +79,21 @@ app.use(passport.initialize());
 
 
 
-const DB = process.env.DATABASE;
+import connectDB from './Utils/db.js';
 
-mongoose.connect(DB)
-    .then(() => {
-        console.log("connected to MongoDB");
-    })
-    .catch((err) => {
-        console.error("MongoDB Connection Error:", err.message);
-        console.log("not connected to MongoDB");
-    });
+// Database connection middleware for Serverless & Express
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+        console.error("Database Connection Middleware Error:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Database connection error: " + (error.message || "Unable to connect to MongoDB Atlas")
+        });
+    }
+});
 
 // Root & Health Check Endpoints
 app.get('/', (req, res) => {
