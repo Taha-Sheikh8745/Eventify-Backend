@@ -90,6 +90,27 @@ mongoose.connect(DB)
         console.log("not connected to MongoDB");
     });
 
+// Root & Health Check Endpoints
+app.get('/', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'Eventify API Backend is running live 🚀',
+        endpoints: {
+            user: '/user',
+            admin: '/admin',
+            health: '/health'
+        }
+    });
+});
+
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        success: true,
+        status: 'UP',
+        timestamp: new Date().toISOString()
+    });
+});
+
 app.use('/user', UserRouter);
 app.use('/admin', AdminRouter);
 
